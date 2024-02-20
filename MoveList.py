@@ -1,4 +1,5 @@
 import Config
+
 # Cycles through board and for each piece matching color finds and adds all it's valid moves to array
 def moves(board, color):
     fullValidMoves,validMoves = [],[]
@@ -41,6 +42,7 @@ def moves(board, color):
             j+=1
         i+=1
     return fullValidMoves
+    
 # Based on board provided, adds all valid moves for the king to array
 def king(board, pos):
     validMoves = []
@@ -79,6 +81,7 @@ def king(board, pos):
     if board[y - 1][x] in color or board[y - 1][x] == 'n':
         validMoves.append(str(x) + str(y - 1))
     return validMoves
+    
 # Based on board provided, adds all valid moves for the queen to array
 def queen(board, pos):
     validMoves = []
@@ -175,6 +178,7 @@ def queen(board, pos):
         else:
             tempX = 8
     return validMoves
+    
 # Based on board provided, adds all valid moves for the rook to array
 def rook(board, pos):
     validMoves = []
@@ -227,6 +231,7 @@ def rook(board, pos):
         else:
             tempX = 8
     return validMoves
+    
 # Based on board provided, adds all valid moves for the bishop to array
 def bishop(board, pos):
     validMoves = []
@@ -284,6 +289,7 @@ def bishop(board, pos):
         else:
             tempY = 8
     return validMoves
+    
 # Based on board provided, adds all valid moves for the knight to array
 def knight(board, pos):
     validMoves = []
@@ -313,6 +319,7 @@ def knight(board, pos):
     if y - 1 > -1 and x + 2 < 8 and (board[y - 1][x + 2] in color or board[y - 1][x + 2] == 'n'):
         validMoves.append(str(x + 2) + str(y - 1))
     return validMoves
+    
 # Based on board provided, adds all valid moves for the pawn to array
 def pawn(board, pos):
     validMoves = []
