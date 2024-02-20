@@ -11,6 +11,7 @@ if __name__ == '__main__':
 
     Config.difficulty = "Easy"
     move = "OO"
+    
     # Creates a Tkinter window with, an 8x8 grid of buttons for chess board, images for the pieces, and labels/buttons
     def initializeUI():
         global a8,a7,a6,a5,a4,a3,a2,a1,b8,b7,b6,b5,b4,b3,b2,b1,c8,c7,c6,c5,c4,c3,c2,c1,d8,d7,d6,d5,d4,d3,d2,d1, \
@@ -111,6 +112,7 @@ if __name__ == '__main__':
         hardButton = Button(window, text = "HARD", bg = "grey", font=('Times 13'), fg = "white", command = lambda: difficultySetting(8))
         hardButton.grid(column = 9, row = 4)
         window.mainloop()
+        
     # Runs the processing of game for display on the UI
     def chess():
         global firstLabel,easyButton,mediumButton,hardButton,\
@@ -169,6 +171,7 @@ if __name__ == '__main__':
                 maxTurns = 221
             # Checks if the recursion quantity in computer move calculation should be increased
             changeRecursionCount(bPiecesLeft, wPiecesLeft)
+            
     # If the number of remaining pieces meets threshold, recursion quantity in ComputerMoveScore is increased
     def changeRecursionCount(bPiecesLeft, wPiecesLeft):
         piecesLeft = bPiecesLeft + wPiecesLeft
@@ -197,10 +200,12 @@ if __name__ == '__main__':
                 if bPiecesLeft < 2 or wPiecesLeft < 2:
                     Config.nearEnd = True
                     Config.It = 14
+                    
     # Takes input from board's buttons indicating location of moving piece, or it's destination
     def buttonPush(loc):
         global move
         move = move + loc
+        
     # Sets difficulty from easy to medium or hard if they're chosen
     def difficultySetting(n):
         # n is used in ComputerMoveScore for deciding recursion count in move calculation
@@ -209,6 +214,7 @@ if __name__ == '__main__':
         if n == 8:
             Config.difficulty = "Hard"
         Config.It = n
+        
     # Uses the 2D board array to update each UI button image with its piece's image
     def updateBoard(board):
         global boardButtons
@@ -245,6 +251,7 @@ if __name__ == '__main__':
                         pos.config(image = whiteRook)
                 j+=1
             i+=1
+            
     # After coloring valid move options in yellow for UI, resets board colors to chess grid
     def resetBoardColors():
         global boardButtons
@@ -265,6 +272,7 @@ if __name__ == '__main__':
             else:
                 color = "grey"
             i+=1
+            
     # Counts the number of input color's remaining pieces
     def piecesCounter(board, color):
         i,j,piecesCount = 0,0,0
@@ -280,6 +288,7 @@ if __name__ == '__main__':
                 j+=1
             i+=1
         return piecesCount
+        
     # Calculates the score of board based on the remaining piece's values and if each player is in check or checkmate
     # Positive score in human's favor and negative in computer's
     def boardScoreCounter(board):
@@ -321,12 +330,14 @@ if __name__ == '__main__':
                 j+=1
             i+=1
         return score
+        
     # Checks if input player is not in check with inCheck() == False and all its possible moves result in check with
     # inCheckMate() == True indicating a stalemate
     def inStalemate(board, color):
         if not inCheck(board, color) and inCheckmate(board, color):
             return True
         return False
+        
     # Locates input player's king and checks opponent's possible moves for any with a destination equal to king's
     # location indicating a check
     def inCheck(board, color):
@@ -350,6 +361,7 @@ if __name__ == '__main__':
             if int(move[3]) == y and int(move[2]) == x:
                 return True
         return False
+        
     # Attempts all valid moves of input player and uses inCheck to see if any of these result in player not being
     # in check
     def inCheckmate(board, color):
@@ -361,11 +373,13 @@ if __name__ == '__main__':
             if not inCheck(tempBoard, color):
                 return False
         return True
+        
     # Colors the possible move locations of the user's chosen piece to yellow
     def colorValidMoves(piecesMoves):
         global boardButtons
         for loc in piecesMoves:
             boardButtons[int(loc[0])][int(loc[1])].config(bg = "yellow")
+            
     # Checks if the chosen move disqualifies castling for the player by taking a rook, moving a rook, moving a king,
     # or performing a castle move
     def castleInvalidator(tempBoard,destY,destX,initY,initX,color):
@@ -410,6 +424,7 @@ if __name__ == '__main__':
                     tempBoard[7][0] = 'n'
                 Config.bCastleLeft,Config.bCastleRight = False, False
         return tempBoard
+        
     # Updates the information required for enPassant if it can be performed next move, updates board if enPassant
     # is performed, or turns pawn into queen if end of board is reached
     def enPassantData(tempBoard,destY,destX,initY,color):
@@ -447,6 +462,7 @@ if __name__ == '__main__':
         else:
             Config.enPassantAllowed = False
         return tempBoard
+        
     # Takes input from user pushing buttons on UI board for moving
     def humanMoveInput(board):
         global secondLabel, move
@@ -481,6 +497,7 @@ if __name__ == '__main__':
                         move = ""
                 colorValidMoves(piecesMoves)
         resetBoardColors()
+        
     # Has user input a move and if it is valid, move is performed and board is updated and returned
     def humanTurn(board):
         global wCastleLeft, wCastleRight, bCastleLeft, bCastleRight, secondLabel, move
@@ -544,6 +561,7 @@ if __name__ == '__main__':
         # Checks castleInvalidator for possibility that move causes either teams castle opportunities to be cancelled
         tempBoard = castleInvalidator(tempBoard,destY,destX,initY,initX,'w')
         return tempBoard
+        
     # For each of black's moves, determines the score of the resulting board and stores it in an array
     def computerInitialMoveScores(validMoves,tempBoard,board):
         moveData = []
