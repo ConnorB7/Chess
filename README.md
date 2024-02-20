@@ -1,2 +1,2 @@
 # Chess
-An original chess program and ai opponent
+An original chess program and engine
