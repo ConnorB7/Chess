@@ -1,5 +1,4 @@
 from typing import Any
-
 import copy
 from tkinter import *
 from concurrent.futures import ProcessPoolExecutor
