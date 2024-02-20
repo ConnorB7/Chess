@@ -51,6 +51,7 @@ def main(inputList):
                         return results
                     x += 1
         return results
+        
 # If the input n is an even number the highest scoring white move's score is returned, if odd the lowest scoring black move's score
 # is returned. White never has the last move as its input 'n' value for miniMax() is at least 1.
 def miniMax(board, n, score):
@@ -139,6 +140,7 @@ def miniMax(board, n, score):
             if tempScore < finalScore:
                 finalScore = tempScore
     return finalScore
+    
 # Locates input player's king and checks opponent's possible moves for any with a destination equal to king's
 # location and indicating a check
 def inCheck(board, color):
@@ -162,6 +164,7 @@ def inCheck(board, color):
         if int(move[3]) == y and int(move[2]) == x:
             return True
     return False
+    
 # Attempts all valid moves of input player and uses inCheck to see if any of these result in player not being
 # in check
 def inCheckmate(board, color):
